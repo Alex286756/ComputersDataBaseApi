@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Compiling the code of Frontend..."
-      - run: cd ./frontend
+      - run: cd ${{ github.workspace }}/frontend
       - run: ls
       - run: npm install
       - run: npm run build
