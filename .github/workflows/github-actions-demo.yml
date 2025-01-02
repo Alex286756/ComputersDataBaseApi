@@ -22,15 +22,7 @@ jobs:
     script:
       - run: echo "Compiling the code of Frontend..."
       - run: cd frontend
-      #    - docker login computerdb.cr.cloud.ru -u $KEY_ID -p $KEY_SECRET
-      #    - docker build --tag frontend https://gitverse.ru/cloudru/evo-containerapp-react-sample.git#master --platform linux/amd64
-      #    - docker push frontend
-      #    - cd ./frontend
       - run: ls
       - run: npm install
       - run: npm run build
       - run: echo "Compile complete."
-  #  artifacts:
-  #    paths:
-  #      - build/*.*
-  #      - package*.json
