@@ -19,7 +19,7 @@ jobs:
 
   build-frontend:
     runs-on: ubuntu-latest
-    script:
+    steps:
       - run: echo "Compiling the code of Frontend..."
       - run: cd frontend
       - run: ls
