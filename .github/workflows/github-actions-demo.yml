@@ -17,14 +17,14 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  build-frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Compiling the code of Frontend..."
-      - run: ls ${{ github.workspace }}
-      - run: ls ${{ github.workspace }}/frontend
-      - run: cd ${{ github.workspace }}/frontend
-      - run: ls
-      - run: npm install
-      - run: npm run build
-      - run: echo "Compile complete."
+#  build-frontend:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: echo "Compiling the code of Frontend..."
+#      - run: ls ${{ github.workspace }}
+#      - run: ls ${{ github.workspace }}/frontend
+#      - run: cd ${{ github.workspace }}/frontend
+#      - run: ls
+#      - run: npm install
+#      - run: npm run build
+#      - run: echo "Compile complete."
