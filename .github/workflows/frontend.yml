@@ -3,6 +3,10 @@
 
 name: Node.js CI
 
+defaults:
+  run:
+    working-directory: ./frontend
+
 on:
   push:
     branches: [ "*" ]
@@ -25,11 +29,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          working-directory: frontend
       - name: Run ci
         run: npm ci
-        working-directory: frontend
       - name: Run build
         run: npm run build --if-present
-        working-directory: frontend
       - run: npm test
