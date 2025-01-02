@@ -1,0 +1,12 @@
+.table_header_panel {
+    background-color: #78f008;
+    height: 100px;
+    width: 500px;
+}
+
+.Caption {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    text-align: center;
+    padding-top: 30px;
+}

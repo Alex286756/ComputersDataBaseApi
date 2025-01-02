@@ -1,0 +1,9 @@
+.admin-main {
+    height: 100wh;
+    display: flex;
+}
+
+.admin-right {
+    width: 100wh;
+    height: 100wh;
+}

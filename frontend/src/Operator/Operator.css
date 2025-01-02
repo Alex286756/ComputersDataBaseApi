@@ -1,0 +1,10 @@
+.user-main {
+    height: 100vh;
+    display: flex;
+    width: max-content;
+}
+
+.user-right {
+    width: 100wh;
+    height: 100vh;
+}

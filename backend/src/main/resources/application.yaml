@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: computer-api
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate.ddl-auto: create
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  file:
+    name: ./var/logs.log
+
+server:
+  port: ${SERVER_PORT}
+
+token:
+  signing:
+    key: sdfsdhfgusdhsadfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg

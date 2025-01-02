@@ -1,0 +1,29 @@
+.LoginPage {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(117, 224, 45);
+}
+
+.UserName {
+    text-align: center;
+    padding-top: 50vh;
+    justify-content: space-around;
+}
+
+.UserPassword {
+    text-align: center;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+.Label {
+    padding: 10px;
+}
+
+.LoginButton {
+    font-size: large;
+    width: 150px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}

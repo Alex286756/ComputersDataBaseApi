@@ -1,0 +1,43 @@
+.complect-number {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.complect-number label{
+    padding: 10px;
+}
+
+.complect-table {
+    border: 3px solid grey;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.complect-header {
+    background-color: rgb(168, 167, 167);
+}
+
+.header-text {
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid black;
+}
+
+.complect-data {
+    border: 1px solid grey;
+    width: 50%;
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.complect-body tr:hover {
+    background: yellow;
+    cursor: pointer;
+}
+
+.active-device {
+    background-color: greenyellow;
+}

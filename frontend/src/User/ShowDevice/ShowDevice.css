@@ -1,0 +1,25 @@
+.device {
+    background-color: rgb(164, 177, 170);
+    height: 90vh;
+    font-size: 26px;
+    width: 80vw;
+}
+
+td {
+    padding: 10px;
+}
+
+input {
+    font-size: 26px;
+}
+
+.close-button {
+    margin: 30px 50px;
+    padding: 10px 30px;
+    font-size: 20px;
+}
+
+.close-button:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
