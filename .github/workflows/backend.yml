@@ -8,9 +8,9 @@
 
 name: Java CI with Maven
 
-defaults:
-  run:
-    working-directory: ./backend
+#defaults:
+#  run:
+#    working-directory: ./backend
 
 on:
   push:
@@ -47,5 +47,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+#      - name: Build the Docker image
+#        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Docker Compose run
+        run: docker compose up
