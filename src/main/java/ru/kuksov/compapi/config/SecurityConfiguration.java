@@ -27,7 +27,7 @@ import java.util.List;
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
-@EnableGlobalMethodSecurity(securedEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true)
 @Tag(name = "Конфигурация")
 public class SecurityConfiguration {
 
@@ -54,7 +54,8 @@ public class SecurityConfiguration {
                                                   "/compapi/v1/roles", "/compapi/v1/roles/**")
                                         .hasRole("ADMIN")
                         .requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-doc/**").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
+//                        .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
