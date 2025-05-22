@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import ru.kuksov.compapi.controller.dto.BrandRequest;
 import ru.kuksov.compapi.model.Brand;
-import ru.kuksov.compapi.repository.BrandRepository;
 import ru.kuksov.compapi.service.BrandService;
 
 import java.util.List;
@@ -19,20 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class BrandControllerTest {
 
-//    @Mock
-//    BrandRepository brandRepository;
-
     @Mock
     BrandService brandService;
-
-//    @Mock
-//    MessageSource messageSource;
 
     @InjectMocks
     BrandController controller;
@@ -141,7 +132,7 @@ class BrandControllerTest {
         var request = new BrandRequest(name);
         var brand = new Brand(3, name);
 
-        doReturn(brand).when(this.brandService).addBrand(request.name());
+        doReturn(brand).when(this.brandService).addBrand(request.getName());
 
         // when
         var responseEntity = this.controller.addNewBrand(request);

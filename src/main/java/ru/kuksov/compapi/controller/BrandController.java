@@ -3,12 +3,15 @@ package ru.kuksov.compapi.controller;
 import com.github.loki4j.slf4j.marker.StructuredMetadataMarker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kuksov.compapi.controller.dto.BrandRequest;
-import ru.kuksov.compapi.controller.dto.BrandResponse;
 import ru.kuksov.compapi.model.Brand;
 import ru.kuksov.compapi.service.BrandService;
 
@@ -95,14 +97,14 @@ public class BrandController {
     @PostMapping
     public ResponseEntity<Brand> addNewBrand(@RequestBody @Validated BrandRequest request) {
         var marker = StructuredMetadataMarker.of("ComputersDB", () -> "add");
-        if (request.name().isEmpty()) {
+        if (request.getName().isEmpty()) {
             log.info(marker, "Brand with empty name don't to be adding");
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .contentType(APPLICATION_JSON)
                     .build();
         }
-        Brand newBrand = this.brandService.addBrand(request.name());
+        Brand newBrand = this.brandService.addBrand(request.getName());
         log.info(marker, "Brand %s successfully adding".formatted(newBrand.getName()));
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -114,24 +116,24 @@ public class BrandController {
     @Operation(summary = "Редактирование бренда")
     @PatchMapping("/{id}")
     public ResponseEntity<Brand> editBrand(@PathVariable int id,
-                          @RequestBody @Validated BrandRequest request) {
+                                           @Valid @RequestBody BrandRequest request) {
         var marker = StructuredMetadataMarker.of("ComputersDB", () -> "edit");
-        if (request.name().isEmpty()) {
+        if (request.getName().isEmpty()) {
             log.info(marker, "Brand cann't have empty name");
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .contentType(APPLICATION_JSON)
                     .build();
         }
-        Brand brand = this.brandService.updateBrand(id, request.name());
+        Brand brand = this.brandService.updateBrand(id, request.getName());
         if (brand == null) {
-            log.info(marker, "Brand %s not found, cann't edit".formatted(request.name()));
+            log.info(marker, "Brand %s not found, cann't edit".formatted(request.getName()));
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .contentType(APPLICATION_JSON)
                     .build();
         }
-        log.info(marker, "Brand %s successfully edit".formatted(request.name()));
+        log.info(marker, "Brand %s successfully edit".formatted(request.getName()));
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(APPLICATION_JSON)
@@ -175,5 +177,39 @@ public class BrandController {
                 .contentType(APPLICATION_JSON)
                 .body("Проблемы при удалении бренда № %d".formatted(id));
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
+        List<String> errors = ex.getBindingResult().getFieldErrors().stream()
+                .map(err -> err.getField() + ": " + err.getDefaultMessage())
+                .toList();
+
+//        return ResponseEntity.badRequest().body(errors);
+
+//        log.info(marker, "Brand cann't have empty name");
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .contentType(APPLICATION_JSON)
+                .body(errors);
+//                .build();
+
+    }
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException ex) {
+//        List<String> errors = ex.getBindingResult().getFieldErrors().stream()
+//                .map(err -> err.getField() + ": " + err.getDefaultMessage())
+//                .toList();
+//
+////        return ResponseEntity.badRequest().body(errors);
+//
+////        log.info(marker, "Brand cann't have empty name");
+//        return ResponseEntity
+//                .status(HttpStatus.BAD_REQUEST)
+//                .contentType(APPLICATION_JSON)
+//                .body(errors);
+////                .build();
+//
+//    }
 
 }
