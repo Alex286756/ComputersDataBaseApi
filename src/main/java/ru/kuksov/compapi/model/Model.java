@@ -13,6 +13,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Модель данных по моделям комплектующих
+ *
+ * @id идентификатор
+ * @name название модели
+ * @author Куксов Алексей Генндьевич
+ * @version 2.0
+ */
 @Entity
 @Builder
 @Getter
@@ -22,12 +30,18 @@ import lombok.Setter;
 @Table(name = "models")
 public class Model {
 
+    /**
+     * Идентификатор модели
+     */
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "model_id_seq")
     @SequenceGenerator(name = "model_id_seq", sequenceName = "model_id_seq", allocationSize = 1)
     private int id;
 
+    /**
+     * Название модели
+     */
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 }
